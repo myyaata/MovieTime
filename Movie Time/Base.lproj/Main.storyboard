@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fSd-UO-vOf">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--AddedFilms-->
+        <scene sceneID="Ydu-rH-TV3">
+            <objects>
+                <viewController title="AddedFilms" id="I6V-vy-Aqn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QZU-Pr-0az">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zcq-hC-aRA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Мои фильмы" image="star.fill" catalog="system" id="uZr-Dk-Ond"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K5R-QL-HQr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-764" y="187"/>
+        </scene>
+        <!--Awards-->
+        <scene sceneID="MAK-FC-PPq">
+            <objects>
+                <viewController title="Awards" id="s3M-gf-9Uu" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L52-sC-EVY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6iq-Oz-VwC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Награды" image="medal.star" catalog="system" id="oCH-jw-bwO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AcO-5q-vAZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-764" y="923"/>
+        </scene>
+        <!--ShowBill-->
+        <scene sceneID="kg7-CE-1NF">
+            <objects>
+                <viewController title="ShowBill" id="S58-Jr-f3J" customClass="ShowBillController" customModule="Movie_Time" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mtb-mY-pOK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="r2J-WA-2gg">
+                                <rect key="frame" x="20" y="118" width="353" height="617"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ShowBillCell" rowHeight="567" id="irI-5W-tZX" customClass="ShowBillCell" customModule="Movie_Time" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="353" height="567"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="irI-5W-tZX" id="mpi-BD-DpG">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="567"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_example" translatesAutoresizingMaskIntoConstraints="NO" id="zPI-EO-hhU">
+                                                    <rect key="frame" x="16" y="16.000000000000028" width="321" height="481.66666666666674"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="zPI-EO-hhU" secondAttribute="height" multiplier="2:3" id="pGo-oQ-JgY"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Отчаянные домохозяйки" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="Wl4-Su-cD2">
+                                                    <rect key="frame" x="41" y="514" width="271" height="53"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Wl4-Su-cD2" firstAttribute="top" secondItem="zPI-EO-hhU" secondAttribute="bottom" constant="16" id="QSp-z2-gA0"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Wl4-Su-cD2" secondAttribute="bottom" constant="16" id="SlI-4z-m6t"/>
+                                                <constraint firstAttribute="trailing" secondItem="zPI-EO-hhU" secondAttribute="trailing" constant="16" id="UQd-V4-udz"/>
+                                                <constraint firstItem="Wl4-Su-cD2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mpi-BD-DpG" secondAttribute="leading" constant="16" id="Zug-Ad-Mkz"/>
+                                                <constraint firstItem="zPI-EO-hhU" firstAttribute="leading" secondItem="mpi-BD-DpG" secondAttribute="leading" constant="16" id="cdQ-Kn-XnL"/>
+                                                <constraint firstItem="zPI-EO-hhU" firstAttribute="top" secondItem="mpi-BD-DpG" secondAttribute="top" constant="16" id="gDd-r2-1ad"/>
+                                                <constraint firstItem="zPI-EO-hhU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Wl4-Su-cD2" secondAttribute="trailing" constant="16" id="lwr-5g-8HI"/>
+                                                <constraint firstItem="zPI-EO-hhU" firstAttribute="centerX" secondItem="mpi-BD-DpG" secondAttribute="centerX" id="xxy-P6-vLP"/>
+                                                <constraint firstItem="Wl4-Su-cD2" firstAttribute="centerX" secondItem="mpi-BD-DpG" secondAttribute="centerX" id="ync-ck-a6H"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="filmName" destination="Wl4-Su-cD2" id="Mra-tp-VHa"/>
+                                            <outlet property="posterPick" destination="zPI-EO-hhU" id="Mdo-Cm-gSQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jXb-kA-JaB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="r2J-WA-2gg" firstAttribute="leading" secondItem="jXb-kA-JaB" secondAttribute="leading" constant="20" id="6ZW-rP-fFf"/>
+                            <constraint firstItem="jXb-kA-JaB" firstAttribute="trailing" secondItem="r2J-WA-2gg" secondAttribute="trailing" constant="20" id="QIR-pv-DNZ"/>
+                            <constraint firstItem="jXb-kA-JaB" firstAttribute="bottom" secondItem="r2J-WA-2gg" secondAttribute="bottom" id="bQD-eg-c8L"/>
+                            <constraint firstItem="r2J-WA-2gg" firstAttribute="top" secondItem="jXb-kA-JaB" secondAttribute="top" id="krc-lX-0J5"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Афиша" image="movieclapper" catalog="system" id="Ejw-yi-pgc"/>
+                    <connections>
+                        <outlet property="tableView" destination="r2J-WA-2gg" id="X3o-rE-aB2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="431-lu-kkf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-764.12213740458014" y="-570.42253521126759"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="OGZ-mg-WIc">
+            <objects>
+                <tabBarController id="fSd-UO-vOf" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8rV-Am-2Xm">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="S58-Jr-f3J" kind="relationship" relationship="viewControllers" id="yzV-oy-FR7"/>
+                        <segue destination="I6V-vy-Aqn" kind="relationship" relationship="viewControllers" id="ELr-gy-V6i"/>
+                        <segue destination="s3M-gf-9Uu" kind="relationship" relationship="viewControllers" id="Zgz-UK-RhB"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XbT-bG-Arv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1871" y="188"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="medal.star" catalog="system" width="92" height="128"/>
+        <image name="movieclapper" catalog="system" width="128" height="113"/>
+        <image name="poster_example" width="260" height="385"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
