@@ -57,6 +57,11 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		32D7DA092FDEC0A6000FF8E1 /* Awards */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Awards;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,7 @@
 		3200B2F12FD9C980002B078B = {
 			isa = PBXGroup;
 			children = (
+				32D7DA092FDEC0A6000FF8E1 /* Awards */,
 				3200B3432FDB0E32002B078B /* Services */,
 				3200B3352FDB08E8002B078B /* Models */,
 				3200B3342FD9FFF5002B078B /* ShowBill */,
@@ -108,6 +114,7 @@
 				3200B2FC2FD9C980002B078B /* Movie Time */,
 				3200B3342FD9FFF5002B078B /* ShowBill */,
 				3200B3352FDB08E8002B078B /* Models */,
+				32D7DA092FDEC0A6000FF8E1 /* Awards */,
 			);
 			name = "Movie Time";
 			packageProductDependencies = (

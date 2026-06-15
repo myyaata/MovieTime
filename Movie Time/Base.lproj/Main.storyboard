@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,18 +28,112 @@
         <!--Awards-->
         <scene sceneID="MAK-FC-PPq">
             <objects>
-                <viewController title="Awards" id="s3M-gf-9Uu" sceneMemberID="viewController">
+                <viewController title="Awards" id="s3M-gf-9Uu" customClass="AwardsViewController" customModule="Movie_Time" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L52-sC-EVY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GH8-F6-p8u">
+                                <rect key="frame" x="175.66666666666666" y="218" width="41.666666666666657" height="52.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gpl-c4-Pav">
+                                <rect key="frame" x="0.0" y="286.66666666666669" width="393" height="280.00000000000006"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="cZ6-d4-zwb"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="96b-Bw-jYA">
+                                    <size key="itemSize" width="361" height="239"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AwardCell" id="WL5-83-5x4" customClass="AwardCell" customModule="Movie_Time" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="0.0" width="361" height="239"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TYE-Qj-qf6">
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="239"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufX-Pg-bLI">
+                                                    <rect key="frame" x="0.0" y="208" width="361" height="2"/>
+                                                    <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="536-cX-IHh"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w3S-oc-Bzg">
+                                                    <rect key="frame" x="158.66666666666666" y="187" width="44" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FL4-w4-uB2">
+                                                            <rect key="frame" x="18" y="-19" width="8" height="82"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="FL4-w4-uB2" firstAttribute="centerX" secondItem="w3S-oc-Bzg" secondAttribute="centerX" id="DiL-nf-fhA"/>
+                                                        <constraint firstAttribute="width" constant="44" id="Hk4-8t-nJ2"/>
+                                                        <constraint firstItem="FL4-w4-uB2" firstAttribute="centerY" secondItem="w3S-oc-Bzg" secondAttribute="centerY" id="HsZ-dH-ob4"/>
+                                                        <constraint firstAttribute="width" secondItem="w3S-oc-Bzg" secondAttribute="height" multiplier="1:1" id="wku-ME-wo9"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="os6-7g-d5m">
+                                                    <rect key="frame" x="105.66666666666669" y="8" width="150" height="150"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="Fhf-ki-Wgn"/>
+                                                        <constraint firstAttribute="height" constant="150" id="lJo-en-YOY"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="w3S-oc-Bzg" secondAttribute="bottom" constant="8" id="CeW-gz-y18"/>
+                                                <constraint firstItem="os6-7g-d5m" firstAttribute="centerX" secondItem="TYE-Qj-qf6" secondAttribute="centerX" id="EzE-ma-zx3"/>
+                                                <constraint firstItem="FL4-w4-uB2" firstAttribute="top" secondItem="os6-7g-d5m" secondAttribute="bottom" constant="10" id="GD8-Tg-fjx"/>
+                                                <constraint firstItem="ufX-Pg-bLI" firstAttribute="leading" secondItem="TYE-Qj-qf6" secondAttribute="leading" id="fQC-V5-edH"/>
+                                                <constraint firstAttribute="trailing" secondItem="ufX-Pg-bLI" secondAttribute="trailing" id="i6J-ek-rKx"/>
+                                                <constraint firstItem="os6-7g-d5m" firstAttribute="top" secondItem="TYE-Qj-qf6" secondAttribute="top" constant="8" id="kmK-bJ-7KV"/>
+                                                <constraint firstItem="w3S-oc-Bzg" firstAttribute="centerX" secondItem="TYE-Qj-qf6" secondAttribute="centerX" id="lOp-fc-zxY"/>
+                                                <constraint firstItem="w3S-oc-Bzg" firstAttribute="centerY" secondItem="ufX-Pg-bLI" secondAttribute="centerY" id="wbq-Af-5xi"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="361" height="239"/>
+                                        <connections>
+                                            <outlet property="awardImageView" destination="os6-7g-d5m" id="jes-KG-uLm"/>
+                                            <outlet property="circleView" destination="w3S-oc-Bzg" id="x55-HF-SBa"/>
+                                            <outlet property="numberLabel" destination="FL4-w4-uB2" id="8dX-gD-IVq"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6iq-Oz-VwC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6iq-Oz-VwC" firstAttribute="trailing" secondItem="Gpl-c4-Pav" secondAttribute="trailing" id="7vr-8w-KYr"/>
+                            <constraint firstItem="Gpl-c4-Pav" firstAttribute="top" secondItem="GH8-F6-p8u" secondAttribute="bottom" constant="16" id="N99-f2-ECR"/>
+                            <constraint firstItem="GH8-F6-p8u" firstAttribute="top" secondItem="6iq-Oz-VwC" secondAttribute="top" constant="100" id="Oiz-BX-SoL"/>
+                            <constraint firstItem="GH8-F6-p8u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6iq-Oz-VwC" secondAttribute="leading" constant="16" id="WCH-oT-3mo"/>
+                            <constraint firstItem="6iq-Oz-VwC" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GH8-F6-p8u" secondAttribute="trailing" constant="16" id="be7-pG-FTa"/>
+                            <constraint firstItem="GH8-F6-p8u" firstAttribute="centerX" secondItem="L52-sC-EVY" secondAttribute="centerX" id="ci8-uS-0nl"/>
+                            <constraint firstItem="Gpl-c4-Pav" firstAttribute="centerY" secondItem="6iq-Oz-VwC" secondAttribute="centerY" id="e9i-kJ-7BW"/>
+                            <constraint firstItem="Gpl-c4-Pav" firstAttribute="leading" secondItem="6iq-Oz-VwC" secondAttribute="leading" id="po6-u3-55q"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Награды" image="medal.star" catalog="system" id="oCH-jw-bwO"/>
+                    <connections>
+                        <outlet property="awardName" destination="GH8-F6-p8u" id="8Tj-2Q-ciE"/>
+                        <outlet property="collectionView" destination="Gpl-c4-Pav" id="isH-H1-VyA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AcO-5q-vAZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-764" y="923"/>
+            <point key="canvasLocation" x="-764.12213740458014" y="922.53521126760563"/>
         </scene>
         <!--ShowBill-->
         <scene sceneID="kg7-CE-1NF">
@@ -59,7 +154,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="567"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster_example" translatesAutoresizingMaskIntoConstraints="NO" id="zPI-EO-hhU">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_poster" translatesAutoresizingMaskIntoConstraints="NO" id="zPI-EO-hhU">
                                                     <rect key="frame" x="16" y="16.000000000000028" width="321" height="481.66666666666674"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="zPI-EO-hhU" secondAttribute="height" multiplier="2:3" id="pGo-oQ-JgY"/>
@@ -71,7 +166,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Отчаянные домохозяйки" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="Wl4-Su-cD2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Название фильма" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="Wl4-Su-cD2">
                                                     <rect key="frame" x="41" y="514" width="271" height="53"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
@@ -137,12 +232,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="loading_poster" width="168" height="224"/>
         <image name="medal.star" catalog="system" width="92" height="128"/>
         <image name="movieclapper" catalog="system" width="128" height="113"/>
-        <image name="poster_example" width="260" height="385"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
