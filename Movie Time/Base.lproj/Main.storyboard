@@ -202,7 +202,7 @@
                             <constraint firstItem="r2J-WA-2gg" firstAttribute="top" secondItem="jXb-kA-JaB" secondAttribute="top" id="krc-lX-0J5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Афиша" image="movieclapper" catalog="system" id="Ejw-yi-pgc"/>
+                    <navigationItem key="navigationItem" id="VNM-Mn-Vbd"/>
                     <connections>
                         <outlet property="tableView" destination="r2J-WA-2gg" id="X3o-rE-aB2"/>
                     </connections>
@@ -210,6 +210,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="431-lu-kkf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-764.12213740458014" y="-570.42253521126759"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qlb-yg-Kjq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Yu-ec-kkN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Афиша" image="movieclapper" catalog="system" id="Ejw-yi-pgc"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RBL-OP-7Ke">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="S58-Jr-f3J" kind="relationship" relationship="rootViewController" id="SQR-fA-C1c"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rX8-KR-Bfa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1491" y="-570"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="OGZ-mg-WIc">
@@ -221,7 +238,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="S58-Jr-f3J" kind="relationship" relationship="viewControllers" id="yzV-oy-FR7"/>
+                        <segue destination="5Yu-ec-kkN" kind="relationship" relationship="viewControllers" id="yzV-oy-FR7"/>
                         <segue destination="I6V-vy-Aqn" kind="relationship" relationship="viewControllers" id="ELr-gy-V6i"/>
                         <segue destination="s3M-gf-9Uu" kind="relationship" relationship="viewControllers" id="Zgz-UK-RhB"/>
                     </connections>

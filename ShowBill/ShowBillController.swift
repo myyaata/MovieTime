@@ -53,7 +53,14 @@ final class ShowBillController: UIViewController {
 extension ShowBillController: UITableViewDelegate {
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-//        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+
+        let cell = tableView.cellForRow(at: indexPath) as? ShowBillCell
+        let image = cell?.posterPick?.image
+        let title = cell?.filmName?.text
+
+        let viewController = MovieDetailsController()
+        viewController.configure(image: image, title: title)
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
