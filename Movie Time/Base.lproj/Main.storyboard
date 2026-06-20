@@ -249,7 +249,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="loading_poster" width="168" height="224"/>
+        <image name="loading_poster" width="1080" height="2243"/>
         <image name="medal.star" catalog="system" width="92" height="128"/>
         <image name="movieclapper" catalog="system" width="128" height="113"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
