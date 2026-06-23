@@ -36,7 +36,7 @@ final class MovieDetailsController: UIViewController {
         return button
     }()
     
-    // TODO: - UIViewController Lifecycle
+    // MARK: - UIViewController Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,12 @@ final class MovieDetailsController: UIViewController {
         guard let movie else { return }
         movieTitle.text = movie.title
         loadDetails(for: movie.imdbID)
+        updateWatchButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateWatchButton()
     }
     
     // MARK: - Public Methods
@@ -123,6 +129,20 @@ final class MovieDetailsController: UIViewController {
     }
     
     @objc private func watchTapped() {
-        //TO-DO
+        guard let movie else { return }
+        let saved = SavedMovie(
+            imdbID: movie.imdbID,
+            title: movie.title,
+            posterURLString: movie.posterURL?.absoluteString,
+            rating: 0)
+        MyMoviesStore.shared.add(saved)
+        watchButton.setTitle("В вашем списке", for: .normal)
+        watchButton.isEnabled = false
+    }
+    
+    private func updateWatchButton() {
+        let inList = MyMoviesStore.shared.contains(movie?.imdbID ?? "")
+        watchButton.setTitle(inList ? "В вашем списке" : "Буду смотреть", for: .normal)
+        watchButton.isEnabled = !inList
     }
 }
