@@ -36,6 +36,13 @@ final class MyMoviesStore {
         movies[i].rating = rating
         save()
     }
+
+    func updateGenres(forID imdbID: String, genres: [String]) {
+        guard let i = movies.firstIndex(where: { $0.imdbID == imdbID }) else { return }
+        guard movies[i].genres != genres else { return }
+        movies[i].genres = genres
+        save()
+    }
     
     // MARK: - Private Methods
     

@@ -11,31 +11,62 @@ final class AwardsViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<AwardSection, Award>!
     private var centeredIndex: Int = -1
-    
-    private let awards: [Award] = [
-        Award(id: 0, title: "Первый шаг",    imageName: "award_1", number: "1"),
-        Award(id: 1, title: "Киноман",       imageName: "award_2", number: "2"),
-        Award(id: 2, title: "Знаток жанров", imageName: "award_3", number: "3"),
-        Award(id: 3, title: "Марафонец",     imageName: "award_4", number: "4"),
-        Award(id: 4, title: "Коллекционер",  imageName: "award_5", number: "5")
-    ]
-    
     private var didCenterFirst = false
+    
+    private lazy var awardSubtitle: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.textColor = .secondaryLabel
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var awards: [Award] {
+        AwardsStore.shared.allAwards
+    }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard !didCenterFirst, !awards.isEmpty else { return }
-        didCenterFirst = true
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
-                                    at: .centeredHorizontally, animated: false)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applySnapshot()
+        centerOnLastUnlocked()       // наводимся на последнюю награду при каждом показе
+    }
+
+    private func centerOnLastUnlocked() {
+        guard !awards.isEmpty else { return }
+        let targetIndex = lastUnlockedIndex() ?? 0
+
+        // ждём, пока коллекция разложится, иначе скролл не сработает
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(
+                at: IndexPath(item: targetIndex, section: 0),
+                at: .centeredHorizontally,
+                animated: false)
+        }
+    }
+
+    private func lastUnlockedIndex() -> Int? {
+        guard let id = AwardsStore.shared.lastUnlockedID else { return nil }
+        return awards.firstIndex(where: { $0.id == id })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSubtitle()
         collectionView.collectionViewLayout = makeLayout()
         collectionView.backgroundColor = .clear
         configureDataSource()
         applySnapshot()
+    }
+    
+    private func setupSubtitle() {
+        view.addSubview(awardSubtitle)
+        NSLayoutConstraint.activate([
+            awardSubtitle.topAnchor.constraint(equalTo: awardName.bottomAnchor, constant: 8),
+            awardSubtitle.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            awardSubtitle.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
     }
     
     private func makeLayout() -> UICollectionViewLayout {
@@ -45,7 +76,6 @@ final class AwardsViewController: UIViewController {
                 widthDimension: .fractionalWidth(1),
                 heightDimension: .fractionalHeight(1)))
  
-            // Ширина ячейки. Кружки будут стоять на таком расстоянии друг от друга.
             let groupWidth = environment.container.contentSize.width * 0.5
             let group = NSCollectionLayoutGroup.horizontal(
                 layoutSize: .init(widthDimension: .absolute(groupWidth),
@@ -53,11 +83,9 @@ final class AwardsViewController: UIViewController {
                 subitems: [item])
  
             let section = NSCollectionLayoutSection(group: group)
-            // 0 между группами → линии соседних ячеек стыкуются в сплошную нить
             section.interGroupSpacing = 0
             section.orthogonalScrollingBehavior = .groupPagingCentered
  
-            //функция, которая срабатывает постоянно, на каждый чуть-чуть сдвиг при прокрутке
             section.visibleItemsInvalidationHandler = { [weak self] items, offset, env in
                 guard let self else { return }
                 let containerWidth = env.container.contentSize.width
@@ -71,7 +99,6 @@ final class AwardsViewController: UIViewController {
                     let distance = abs(item.center.x - centerX)
                     let ratio = max(0, 1 - distance / maxDistance)
  
-                    // Тянемся к самой ячейке и красим её подвиды (не весь item!)
                     if let cell = self.collectionView.cellForItem(at: item.indexPath) as? AwardCell {
                         cell.updateAppearance(ratio: ratio)
                     }
@@ -90,7 +117,13 @@ final class AwardsViewController: UIViewController {
     private func updateTitle(forCenteredItemAt index: Int) {
         guard index >= 0, index < awards.count, index != centeredIndex else { return }
         centeredIndex = index
-        awardName.text = awards[index].title
+        let award = awards[index]
+        awardName.text = award.title
+        awardSubtitle.text = subtitle(for: award)
+    }
+    
+    private func subtitle(for award: Award) -> String {
+        AwardsStore.shared.isUnlocked(id: award.id) ? "Получено!" : award.description
     }
     
     private func configureDataSource() {
@@ -98,17 +131,34 @@ final class AwardsViewController: UIViewController {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: AwardCell.reuseIdentifier,
                 for: indexPath) as! AwardCell
-            cell.configure(with: award)
+            let unlocked = AwardsStore.shared.isUnlocked(id: award.id)
+
+            cell.configure(with: award, isUnlocked: unlocked)
             return cell
         }
     }
     
     private func applySnapshot() {
-        var snapShot = NSDiffableDataSourceSnapshot<AwardSection, Award>() //пустой снимок данных
-        snapShot.appendSections([.main])
-        snapShot.appendItems(awards)
-        dataSource.apply(snapShot, animatingDifferences: false)
-        awardName.text = awards.first?.title ?? "Нет наград"
+        var snapshot = dataSource.snapshot()
+
+        if snapshot.sectionIdentifiers.contains(.main) {
+            // раздел уже есть → просто обновляем ячейки (перерисовка состояния "Получено!")
+            snapshot.reconfigureItems(awards)
+        } else {
+            // первый раз → создаём раздел и кладём награды
+            snapshot.appendSections([.main])
+            snapshot.appendItems(awards)
+        }
+
+        dataSource.apply(snapshot, animatingDifferences: false)
+
+        centeredIndex = -1
+        if let first = awards.first {
+            awardName.text = first.title
+            awardSubtitle.text = subtitle(for: first)
+        } else {
+            awardName.text = "Нет наград"
+            awardSubtitle.text = nil
+        }
     }
 }
-

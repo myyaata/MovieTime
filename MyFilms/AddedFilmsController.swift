@@ -56,10 +56,11 @@ final class AddedFilmsController: UIViewController {
     }
     
     private func configureDataSource() {
-        let registration = UICollectionView.CellRegistration<MyMovieCell, SavedMovie> { cell, _, movie in
+        let registration = UICollectionView.CellRegistration<MyMovieCell, SavedMovie> { [weak self] cell, _, movie in
             cell.configure(with: movie)
-            cell.onRatingChanged = { rating in
+            cell.onRatingChanged = { [weak self] rating in
                 MyMoviesStore.shared.setRating(rating, forID: movie.imdbID)
+                self?.presentNewAwards(AwardsStore.shared.checkAndUnlock())
             }
         }
         
@@ -74,8 +75,19 @@ final class AddedFilmsController: UIViewController {
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<MyMoviesSection, SavedMovie>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(MyMoviesStore.shared.movies)
+        snapshot.appendItems(MyMoviesStore.shared.movies, toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: true)
+    }
+
+    private func presentNewAwards(_ awards: [Award]) {
+        guard !awards.isEmpty else { return }
+        let titles = awards.map(\.title).joined(separator: ", ")
+        let alert = UIAlertController(
+            title: "Получена награда",
+            message: titles,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
 

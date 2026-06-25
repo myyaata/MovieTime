@@ -4,4 +4,5 @@ nonisolated struct SavedMovie: Codable, Hashable {
     let title: String
     let posterURLString: String?
     var rating: Int
+    var genres: [String] = []
 }

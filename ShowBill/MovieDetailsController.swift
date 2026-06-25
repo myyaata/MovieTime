@@ -70,6 +70,10 @@ final class MovieDetailsController: UIViewController {
                 self?.actorsLabel.text = "В ролях: \(d.actors)"
                 self?.ratingLabel.text = "Рейтинг: \(d.imdbRating)"
                 self?.loadPoster(from: d.posterURL)
+                if MyMoviesStore.shared.contains(imbdID) {
+                    MyMoviesStore.shared.updateGenres(forID: imbdID, genres: d.genreList)
+                    self?.presentNewAwards(AwardsStore.shared.checkAndUnlock())
+                }
             }
         }
     }
@@ -136,8 +140,20 @@ final class MovieDetailsController: UIViewController {
             posterURLString: movie.posterURL?.absoluteString,
             rating: 0)
         MyMoviesStore.shared.add(saved)
+        presentNewAwards(AwardsStore.shared.checkAndUnlock())
         watchButton.setTitle("В вашем списке", for: .normal)
         watchButton.isEnabled = false
+    }
+
+    private func presentNewAwards(_ awards: [Award]) {
+        guard !awards.isEmpty else { return }
+        let titles = awards.map(\.title).joined(separator: ", ")
+        let alert = UIAlertController(
+            title: "Получена награда",
+            message: titles,
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     private func updateWatchButton() {
