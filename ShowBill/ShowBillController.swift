@@ -7,7 +7,7 @@ final class ShowBillController: UIViewController {
     private var movies: [Movie] = []
     private let moviesLoader = MoviesLoader()
     
-    private let query = "marvel"
+    private let query = "spider"
     private var currentPage = 1
     private var isLoading = false
     private var canLoadMore = true
@@ -53,14 +53,11 @@ final class ShowBillController: UIViewController {
 extension ShowBillController: UITableViewDelegate {
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-
-        let cell = tableView.cellForRow(at: indexPath) as? ShowBillCell
-        let image = cell?.posterPick?.image
-        let title = cell?.filmName?.text
-
-        let viewController = MovieDetailsController()
-        viewController.configure(image: image, title: title)
-        navigationController?.pushViewController(viewController, animated: true)
+        
+        let movie = movies[indexPath.row]
+        let detail = MovieDetailsController()
+        detail.movie = movie
+        navigationController?.pushViewController(detail, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

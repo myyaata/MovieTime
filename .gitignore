@@ -3,4 +3,6 @@ Secrets.swift
 xcuserdata/
 *.xcuserstate
 DerivedData/
+.derivedData/
 build/
+.cursor/

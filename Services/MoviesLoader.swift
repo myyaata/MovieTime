@@ -52,6 +52,29 @@ struct MoviesLoader: MoviesLoading {
                    handler(.failure(error))
                }
            }
-       }
+    }
+    
+    func loadDetail(imdbID: String, handler: @escaping (Result<MovieDetail, Error>) -> Void) {
+        var components = URLComponents(string: "https://www.omdbapi.com/")!
+        components.queryItems = [
+            URLQueryItem(name: "apikey", value: apiKey),
+            URLQueryItem(name: "i", value: imdbID),
+            URLQueryItem(name: "plot", value: "short")
+        ]
+        guard let url = components.url else { return }
+        networkClient.fetch(url: url) { result in
+            switch result {
+            case .success(let data):
+                do {
+                    let detail = try JSONDecoder().decode(MovieDetail.self, from: data)
+                    handler(.success(detail))
+                } catch { handler(.failure(error)) }
+            case .failure(let error):
+                handler(.failure(error))
+            }
+        }
+    }
+        
+    
    }
     
